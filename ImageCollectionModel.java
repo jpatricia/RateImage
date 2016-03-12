@@ -7,6 +7,7 @@ public class ImageCollectionModel extends Observable{
     public ArrayList<ImageModel> ImageList;
     public String viewMode;
     public String change;
+    public int width,height;
 
     ImageCollectionModel(){
         ImageList = new ArrayList<ImageModel>();
@@ -34,6 +35,19 @@ public class ImageCollectionModel extends Observable{
 
     public String getviewMode(){
         return viewMode;
+    }
+
+    public void setSize(int w, int h){
+        width = w;
+        height = h;
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
     }
 
 
