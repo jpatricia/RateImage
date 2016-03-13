@@ -3,15 +3,22 @@ import java.util.Observable;
 
 public class ImageCollectionModel extends Observable{
     private boolean first = true;
-    private Stars starButton;
     public ArrayList<ImageModel> ImageList;
+    public ArrayList<ImageModel> SecondList;
+    public boolean[] fullStar;
     public String viewMode;
     public String change;
     public int width,height;
+    public int filterRating;
 
     ImageCollectionModel(){
         ImageList = new ArrayList<ImageModel>();
+        SecondList = new ArrayList<ImageModel>();
         viewMode = "grid"; //default
+        fullStar = new boolean[6];
+        for(int i=1;i<6;i++){
+            fullStar[i] = false;
+        }
     }
 
     public void getPrevImages(ArrayList<ImageModel> prev){
@@ -20,6 +27,7 @@ public class ImageCollectionModel extends Observable{
 
     public void addImage(ImageModel m){
         ImageList.add(m);
+        SecondList.add(m);
         System.out.println(ImageList.size());
         change = "add";
         setChanged();
@@ -27,14 +35,10 @@ public class ImageCollectionModel extends Observable{
     }
 
     public void setMode(String mode){
-        viewMode = mode;
+        viewMode = mode; //change to grid or list
         change = "view";
         setChanged();
         notifyObservers();
-    }
-
-    public String getviewMode(){
-        return viewMode;
     }
 
     public void setSize(int w, int h){
@@ -42,12 +46,27 @@ public class ImageCollectionModel extends Observable{
         height = h;
     }
 
-    public int getWidth(){
-        return width;
+    public void setRatingImage(ImageModel imgModel,int rate){
+        for(int i=0;i< ImageList.size();i++){
+            if(ImageList.get(i) == imgModel){
+                ImageList.get(i).RatingSet(rate);
+            }
+        }
     }
 
-    public int getHeight(){
-        return height;
+    public int getRatingImage(ImageModel imgModel){
+        for(int i=0;i< ImageList.size();i++){
+            if(ImageList.get(i) == imgModel){
+                return ImageList.get(i).rating;
+            }
+        }
+        return 0;
+    }
+
+    public void updateStar(){
+        System.out.println("update star");
+        setChanged();
+        notifyObservers();
     }
 
 

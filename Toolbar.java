@@ -9,42 +9,39 @@ import java.util.Observer;
 public class Toolbar extends JPanel implements Observer{
     private ImageCollectionModel model;
     private JPanel starPanel;
+    private JPanel left;
+    private JPanel right;
+    private JPanel center;
     private Stars starButton;
 
     Toolbar(ImageCollectionModel model_){
         model = model_;
         starPanel = new JPanel();
-        starPanel.setLayout(new GridLayout(0,5));
+        starButton = new Stars("toolbar");
+        left = new JPanel(new GridLayout(0,2));
+        right = new JPanel(new FlowLayout());
+        center = new JPanel(new GridLayout(0,1));
+        starPanel = new JPanel(new FlowLayout());
 
-        addItems();
+        this.setLayout(new BorderLayout());
         this.setBackground(new Color(242,255,249));
-        this.add(starPanel);
+        this.setOpaque(true);
+        addItems();
     }
 
     void addItems(){
-        this.setLayout(new GridBagLayout());
-        GridBagConstraints gc = new GridBagConstraints();
+        System.out.println("addItems toolbar");
 
         JButton gridButton = new JButton();
         JButton listButton = new JButton();
         JLabel title = new JLabel("Fotag!");
         JButton load = new JButton();
         JLabel filter = new JLabel("Filter by: ");
-//        JButton star1 = new JButton();
-//        JButton star2 = new JButton();
-//        JButton star3 = new JButton();
-//        JButton star4 = new JButton();
-//        JButton star5 = new JButton();
 
+        //add image to the JLabel(grid, list and load)
         gridButton.setIcon(new ImageIcon("grid_icon.png"));
         listButton.setIcon(new ImageIcon("list_icon.png"));
         load.setIcon(new ImageIcon("load_icon.png"));
-
-//        star1.setIcon(new ImageIcon("star_empty.png"));
-//        star2.setIcon(new ImageIcon("star_full.png"));
-//        star3.setIcon(new ImageIcon("star_full.png"));
-//        star4.setIcon(new ImageIcon("star_full.png"));
-//        star5.setIcon(new ImageIcon("star_full.png"));
 
         //set each item to have the same color as Toolbar background
         gridButton.setBackground(new Color(242,255,249));
@@ -52,130 +49,49 @@ public class Toolbar extends JPanel implements Observer{
         title.setBackground(new Color(242,255,249));
         filter.setBackground(new Color(242,255,249));
         load.setBackground(new Color(242,255,249));
-//        star1.setBackground(new Color(242,255,249));
-//        star2.setBackground(new Color(242,255,249));
-//        star3.setBackground(new Color(242,255,249));
-//        star4.setBackground(new Color(242,255,249));
-//        star5.setBackground(new Color(242,255,249));
+        title.setSize(500,100);
 
-
-//        star1.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseEntered(MouseEvent e) {
-//                star1.setIcon(new ImageIcon("star_full.png"));
-//            }
-////            @Override
-////            public void mouseExited(MouseEvent e) {
-////                star1.setIcon(new ImageIcon("star_empty.png"));
-////            }
-//            @Override
-//            public void mousePressed(MouseEvent e){
-//                star1.setIcon(new ImageIcon("star_full.png"));
-//            }
-//        });
-
-
-
-
+        //set the buttons to not have border
         gridButton.setBorderPainted(false);
         listButton.setBorderPainted(false);
         load.setBorderPainted(false);
-//        star1.setBorderPainted(false);
-//        star2.setBorderPainted(false);
-//        star3.setBorderPainted(false);
-//        star4.setBorderPainted(false);
-//        star5.setBorderPainted(false);
+
 
         //set font,size and color for JLabel
         title.setFont(new Font("Comic Sans MS", Font.BOLD, 38));
         filter.setFont(new Font("Arial",Font.BOLD, 20));
         filter.setForeground(Color.BLACK);
         title.setForeground(Color.BLACK);
+        title.setLocation(300,10);
 
         //set everything to opaque true
         gridButton.setOpaque(true);
         listButton.setOpaque(true);
-        title.setOpaque(true);
         filter.setOpaque(true);
         load.setOpaque(true);
-//        star1.setOpaque(true);
-//        star2.setOpaque(true);
-//        star3.setOpaque(true);
-//        star4.setOpaque(true);
-//        star5.setOpaque(true);
+        title.setOpaque(true);
 
-//        starPanel.add(star1);
-//        starPanel.add(star2);
-//        starPanel.add(star3);
-//        starPanel.add(star4);
-//        starPanel.add(star5);
+        //add components to the panel
+        starPanel.add(starButton);
+        left.add(gridButton);
+        left.add(listButton);
+        center.add(title);
+        right.add(load);
+        right.add(filter);
+        right.add(starPanel);
 
-        //add grid button
-        gc.gridwidth = 1;
-        gc.gridheight = 1;
-        gc.gridx = 1;
-        gc.gridy = 0;
-        gc.anchor = GridBagConstraints.WEST;
-        this.add(gridButton,gc);
-        gc.gridx++;
+        //set background of right panel
+        starPanel.setBackground(new Color(242,255,249));
+        right.setBackground(new Color(242,255,249));
+        center.setBackground(new Color(242,255,249));
+        center.setOpaque(true);
 
-        //add list button
-        gc.weightx=1.0;
-        gc.anchor = GridBagConstraints.WEST;
-        this.add(listButton,gc);
-        gc.gridx++;
+        //add panels to view
+        this.add(left, BorderLayout.WEST);
+        this.add(center, BorderLayout.CENTER);
+        this.add(right, BorderLayout.EAST);
 
-        //add title
-       // gc.fill = GridBagConstraints.BOTH;
-        gc.gridwidth = 1;
-        gc.gridheight = 1;
-        gc.weightx = 1.0;
-        gc.anchor = GridBagConstraints.CENTER;
-        this.add(title, gc);
-        gc.gridx+=4;
-
-        //add list button
-       // gc.fill = GridBagConstraints.NONE;
-        gc.gridwidth = 1;
-        gc.gridheight = 1;
-        gc.weightx = 0.5;
-        gc.anchor = GridBagConstraints.EAST;
-        this.add(load,gc);
-        gc.gridx+=3;
-
-        gc.weightx = 0.5;
-        gc.anchor = GridBagConstraints.EAST;
-        this.add(filter,gc);
-        gc.gridx++;
-
-        gc.fill = GridBagConstraints.EAST;
-       // gc.weightx = 0.5;
-        gc.anchor = GridBagConstraints.EAST;
-        this.add(starPanel,gc);
-
-
-
-////        gc.weightx = 1.0;
-//        gc.anchor = GridBagConstraints.EAST;
-//        this.add(star2,gc);
-//        gc.gridx++;
-//
-////        gc.weightx = 1.0;
-//        gc.anchor = GridBagConstraints.EAST;
-//        this.add(star3,gc);
-//        gc.gridx++;
-//
-////        gc.weightx = 1.0;
-//        gc.anchor = GridBagConstraints.EAST;
-//        this.add(star4,gc);
-//        gc.gridx++;
-//
-//        gc.weightx = 0.5;
-//        gc.anchor = GridBagConstraints.EAST;
-//        this.add(star5,gc);
-//        gc.gridx++;
-
-
+        //load button listener
         load.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
@@ -187,8 +103,23 @@ public class Toolbar extends JPanel implements Observer{
                 //If user chooses to open a file
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File[] file = fileChooser.getSelectedFiles();
-
+//                    File prev = new File("listOfImages.txt");
+//                    if(prev.exists()){
+//                        System.out.println("file exist");
+//                        try{
+//                            FileInputStream fs = new FileInputStream(prev);
+//                            ObjectInputStream ois = new ObjectInputStream(fs);
+//
+//                            ArrayList<ImageModel> prevImages = (ArrayList<ImageModel>) ois.readObject();
+//                            model.getPrevImages(prevImages);
+//
+//                        } catch(Exception ex){
+//                            ex.printStackTrace();
+//                        }
+//
+//                    }
                     try {
+
                         for(int i=0;i<file.length;i++){
                             ImageModel img = new ImageModel(file[i]);
                             model.addImage(img);
@@ -201,10 +132,86 @@ public class Toolbar extends JPanel implements Observer{
             }
         });
 
+        gridButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.setMode("grid");
+            }
+        });
+
+        listButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                model.setMode("list");
+            }
+        });
+
+        starButton.star1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                starButton.setRating(1);
+                model.filterRating = 1;
+                model.change = "filter";
+                model.updateStar();
+            }
+        });
+
+        starButton.star2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                starButton.setRating(2);
+                model.filterRating = 2;
+                model.change = "filter";
+                model.updateStar();
+            }
+        });
+
+        starButton.star3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                starButton.setRating(3);
+                model.filterRating = 3;
+                model.change = "filter";
+                model.updateStar();
+            }
+        });
+
+        starButton.star4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                starButton.setRating(4);
+                model.filterRating = 4;
+                model.change = "filter";
+                model.updateStar();
+            }
+        });
+
+        starButton.star5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                starButton.setRating(5);
+                model.filterRating = 5;
+                model.change = "filter";
+                model.updateStar();
+            }
+        });
+
+        starButton.clear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                starButton.clearStar();
+                model.filterRating = 0;
+                model.change = "filter";
+                model.updateStar();
+            }
+        });
+
     }
 
     @Override
     public void update(Observable arg0, Object arg1){
-
+        System.out.println("Toolbar update");
+        addItems();
+        revalidate();
     }
 }

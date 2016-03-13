@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.*;
 
 public class Fotag {
@@ -11,13 +10,14 @@ public class Fotag {
         ImageCollectionModel model = new ImageCollectionModel();
         ImageCollectionView view = new ImageCollectionView(model);
         Toolbar toolbar = new Toolbar(model);
+        JScrollPane panelScroll;
 
         model.addObserver(view);
         model.notifyObservers();
 
         JPanel p = new JPanel(new BorderLayout());
         f.getContentPane().add(p);
-        f.setSize(800,600);
+        f.setSize(1000,700);
 
         //set background color of header and view
         toolbar.setBackground(new Color(242,255,249));
@@ -25,6 +25,14 @@ public class Fotag {
         toolbar.setOpaque(true);
         view.setBackground(new Color(192,233,240));
         view.setOpaque(true);
+
+        panelScroll = new JScrollPane(view);
+        panelScroll.setPreferredSize(new Dimension(700,500));
+        panelScroll.setBackground(new Color(192,233,240));
+        view.setPreferredSize(new Dimension(800,600));
+
+//        panelScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+//        panelScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         //add header and view to the panel
         p.add(toolbar,BorderLayout.NORTH);
@@ -50,6 +58,13 @@ public class Fotag {
 
                 }
 
+            }
+        });
+
+        f.addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                model.setSize(f.getWidth(),f.getHeight());
             }
         });
 
