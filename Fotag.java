@@ -46,12 +46,19 @@ public class Fotag {
             public void windowClosing(WindowEvent e) {
                 System.out.println("Exit");
                 try{
-//                    FileWriter fstream = new FileWriter("list.txt");
-//                    BufferedWriter out = new BufferedWriter(fstream);
-                    File file = new File("listOfImages.txt");
-                    FileOutputStream fs = new FileOutputStream(file);
-                    ObjectOutputStream out = new ObjectOutputStream(fs);
-                    out.writeObject(model.ImageList);
+                    FileWriter fstream = new FileWriter("listOfImages.txt");
+                    PrintWriter writer = new PrintWriter(fstream);
+                    BufferedWriter out = new BufferedWriter(writer);
+//                    File file = new File("listOfImages.txt");
+//                    FileOutputStream fs = new FileOutputStream(file);
+//                    ObjectOutputStream out = new ObjectOutputStream(fs);
+                    for(int i=0;i<model.ImageList.size();i++){
+                        out.write(model.ImageList.get(i).getPath()+"\n");
+                        out.newLine();
+                        out.write(model.ImageList.get(i).rating+"\n");
+                        out.newLine();
+                    }
+                    //out.writeObject(model.ImageList);
                     out.close();
 
                 } catch(IOException ex){

@@ -2,7 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -103,25 +105,46 @@ public class Toolbar extends JPanel implements Observer{
                 //If user chooses to open a file
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File[] file = fileChooser.getSelectedFiles();
-//                    File prev = new File("listOfImages.txt");
-//                    if(prev.exists()){
-//                        System.out.println("file exist");
-//                        try{
+                    File prev = new File("listOfImages.txt");
+                    if(prev.exists()){
+                        System.out.println("file exist");
+                        try{
+                            FileReader fr = new FileReader(prev);
+                            BufferedReader br = new BufferedReader((fr));
 //                            FileInputStream fs = new FileInputStream(prev);
 //                            ObjectInputStream ois = new ObjectInputStream(fs);
-//
-//                            ArrayList<ImageModel> prevImages = (ArrayList<ImageModel>) ois.readObject();
-//                            model.getPrevImages(prevImages);
-//
-//                        } catch(Exception ex){
-//                            ex.printStackTrace();
-//                        }
-//
-//                    }
+                            String pathImage = "";
+                            for(String line; (line = br.readLine()) != null; ) {
+                                //line is the path file
+                                System.out.println(line);
+                                if(isInteger(line)){
+                                    //this line is the rating of the image
+                                    System.out.println("path img: "+pathImage);
+                                    File prevImg = new File(pathImage);
+                                    int imgStarPrev = Integer.parseInt(line);
+                                    System.out.println("strStarPrev: "+line);
+                                    System.out.println("intStarPrev: "+imgStarPrev);
+                                    ImageModel img = new ImageModel(prevImg,imgStarPrev);
+                                    model.addImage(img);
+                                }else if(!isInteger(line)){
+                                    //this line is the path to the images
+                                    System.out.println("line: "+ line);
+                                    if(line.equals("")){
+                                        System.out.println("NONE");
+                                    }else{
+                                        pathImage = line;
+                                    }
+
+                                }
+                            }
+                        } catch(Exception ex){
+                            ex.printStackTrace();
+                        }
+                    }
                     try {
 
                         for(int i=0;i<file.length;i++){
-                            ImageModel img = new ImageModel(file[i]);
+                            ImageModel img = new ImageModel(file[i],0);
                             model.addImage(img);
                         }
 
@@ -206,6 +229,30 @@ public class Toolbar extends JPanel implements Observer{
             }
         });
 
+    }
+
+    public static boolean isInteger(String str) {
+        if (str == null) {
+            return false;
+        }
+        int length = str.length();
+        if (length == 0) {
+            return false;
+        }
+        int i = 0;
+        if (str.charAt(0) == '-') {
+            if (length == 1) {
+                return false;
+            }
+            i = 1;
+        }
+        for (; i < length; i++) {
+            char c = str.charAt(i);
+            if (c < '0' || c > '9') {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override

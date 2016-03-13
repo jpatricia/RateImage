@@ -26,21 +26,21 @@ public class ImageCollectionView extends JPanel implements Observer{
 
         this.setLayout(new FlowLayout()); //default
 
-        ArrayList<ImageModel> list = model.ImageList;
-        if(list.size() !=0){
-            System.out.println("imagelist is not empty");
-            for(int i=0;i<list.size();i++){
-                JLabel image = new JLabel(list.get(i).getIcon());
-                JLabel name = new JLabel(list.get(i).getName());
-
-                image.setOpaque(true);
-                name.setOpaque(true);
-
-                this.add(image);
-                this.add(name);
-                revalidate();
-            }
-        }
+//        ArrayList<ImageModel> list = model.ImageList;
+//        if(list.size() !=0){
+//            System.out.println("imagelist is not empty");
+//            for(int i=0;i<list.size();i++){
+//                JLabel image = new JLabel(list.get(i).getIcon());
+//                JLabel name = new JLabel(list.get(i).getName());
+//
+//                image.setOpaque(true);
+//                name.setOpaque(true);
+//
+//                this.add(image);
+//                this.add(name);
+//                revalidate();
+//            }
+//        }
 
     }
 
@@ -130,7 +130,6 @@ public class ImageCollectionView extends JPanel implements Observer{
                         }
                         System.out.println("pref size: " + resized.getPreferredSize());
                         imageWindow.add(resized);
-                        //imageWindow.setSize(resized.getPreferredSize());
                         imageWindow.pack();
                         imageWindow.setVisible(true);
                     }
@@ -162,8 +161,6 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(1);
                         model.setRatingImage(list.get(j),1);
-                      //  model.setRatingImage(list.get(size - 1), 1);
-                      //  System.out.println("star ActionListener " + model.getRatingImage(list.get(size - 1)));
                     }
                 });
 
@@ -172,8 +169,6 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(2);
                         model.setRatingImage(list.get(j),2);
-                       // model.setRatingImage(list.get(size - 1), 2);
-                       // System.out.println("star ActionListener " + model.getRatingImage(list.get(size - 1)));
                     }
                 });
 
@@ -182,8 +177,6 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(3);
                         model.setRatingImage(list.get(j),3);
-                       // model.setRatingImage(list.get(size - 1), 3);
-                       // System.out.println("star ActionListener " + model.getRatingImage(list.get(size - 1)));
                     }
                 });
 
@@ -192,8 +185,6 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(4);
                         model.setRatingImage(list.get(j),4);
-                       // model.setRatingImage(list.get(size - 1), 4);
-                      //  System.out.println("star ActionListener " + model.getRatingImage(list.get(size - 1)));
                     }
                 });
 
@@ -202,8 +193,6 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(5);
                         model.setRatingImage(list.get(j),5);
-                      //  model.setRatingImage(list.get(size - 1), 5);
-                       // System.out.println("star ActionListener " + model.getRatingImage(list.get(size - 1)));
                     }
                 });
 

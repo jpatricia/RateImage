@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 public class ImageCollectionModel extends Observable{
-    private boolean first = true;
     public ArrayList<ImageModel> ImageList;
     public ArrayList<ImageModel> SecondList;
     public boolean[] fullStar;
