@@ -12,6 +12,8 @@ public class Stars extends JPanel {
     public JButton clear;
 
     Stars(String c){
+
+        this.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
         content = c;
         filled = new boolean[6];
         for(int i=0;i<6;i++){

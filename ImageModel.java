@@ -1,6 +1,12 @@
 import javax.swing.*;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class ImageModel {
     public int rating; //for the rating of the image
@@ -8,7 +14,7 @@ public class ImageModel {
     private ImageIcon imgIcon;
     private String imgPath;
     private String imgName;
-    private FileTime imgDate;
+    public String imgDate;
 
     ImageModel(File f){
         System.out.println(f.getPath());
@@ -16,6 +22,18 @@ public class ImageModel {
         imgIcon = new ImageIcon(f.getPath());
         rating = 0;
         imgName = f.getName();
+
+        Path path = Paths.get(imgPath);
+        BasicFileAttributes attributes ;
+        try{
+            attributes= Files.readAttributes(path, BasicFileAttributes.class);
+            FileTime creationTime = attributes.creationTime();
+            DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+            String date = df.format(creationTime.toMillis());
+            imgDate = date;
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public ImageIcon getIcon(){
@@ -30,16 +48,4 @@ public class ImageModel {
         rating = r;
     }
 
-//    public FileTime getDate() throws IOException{
-//        Path path = Paths.get(imgPath);
-//        BasicFileAttributes attributes ;
-//        try{
-//            attributes= Files.readAttributes(path, BasicFileAttributes.class);
-//            FileTime creationTime = attributes.creationTime();
-//            imgDate = creationTime;
-//        } catch(Exception ex){
-//            ex.printStackTrace();
-//        }
-//        return imgDate;
-//    }
 }

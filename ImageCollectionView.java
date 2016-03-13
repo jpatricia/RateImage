@@ -50,32 +50,39 @@ public class ImageCollectionView extends JPanel implements Observer{
         int size = list.size();
         if(size !=0){
             for(int i=0;i<size;i++) {
-                Box b = Box.createHorizontalBox();
+                //create box for each image
+                Box b = Box.createVerticalBox();
+                Box imgBox = Box.createHorizontalBox();
                 if (model.viewMode == "list") {
                     System.out.println("box list");
-                    b = Box.createHorizontalBox();
+                    imgBox = Box.createHorizontalBox();
+                    imgBox.setPreferredSize(new Dimension(300,200));
                 } else if (model.viewMode == "grid") {
                     System.out.println("box grid");
-                    b = Box.createVerticalBox();
-                }
-
-                JLabel image = new JLabel();
-
-//                JLabel name = new JLabel(list.get(size - 1).getName());
-
-                //JLabel date = new JLabel(list.get(size-1).getDate());
-                Stars star = new Stars("view");
-                if(list.get(i).rating !=0){
-                    star.setRating(list.get(i).rating);
+                    imgBox = Box.createVerticalBox();
+                    imgBox.setPreferredSize(new Dimension(300,300));
                 }
 
                 String title = list.get(i).getName();
                 ImageIcon icon = list.get(i).getIcon();
-//                String title = list.get(size - 1).getName();
-//                ImageIcon icon = list.get(size - 1).getIcon();
+
+                //image
+                JLabel image = new JLabel();
+
+                //image name
                 JLabel name = new JLabel();
                 name.setText(title);
                 Image im = icon.getImage();
+
+                //image date created
+                JLabel dateCreated = new JLabel();
+                dateCreated.setText(list.get(i).imgDate);
+
+                //image rating stars
+                Stars star = new Stars("view");
+                if(list.get(i).rating !=0){
+                    star.setRating(list.get(i).rating);
+                }
 
                 int widthImg = icon.getIconWidth();
                 int heightImg = icon.getIconHeight();
@@ -94,10 +101,6 @@ public class ImageCollectionView extends JPanel implements Observer{
 
                 Image img = im;
                 image.setIcon(icon);
-
-
-                // image.setOpaque(true); //these two are commented because
-                // name.setOpaque(true); //apparently it'll make bgrd grey
 
                 image.addMouseListener(new MouseAdapter() {
                     @Override
@@ -134,14 +137,19 @@ public class ImageCollectionView extends JPanel implements Observer{
 
                 });
 
-                b.add(image);
                 b.add(name);
+                b.add(dateCreated);
                 b.add(star);
+                imgBox.add(image);
+                imgBox.add(b);
                 b.setOpaque(true);
+                imgBox.setOpaque(true);
                 star.setBackground(new Color(192, 233, 240));
+//                imgBox.setBackground(Color.GRAY);
+//                b.setBackground(Color.PINK);
 
                 this.add(Box.createRigidArea(new Dimension(30, 30)));
-                this.add(b);
+                this.add(imgBox);
                 // panelScroll.add(panel);
 
                 // panel.setOpaque(true);
@@ -264,6 +272,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                 this.setLayout(new FlowLayout());
             }else if(model.viewMode == "list"){
                 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+                this.setAlignmentX(LEFT_ALIGNMENT);
             }
             addImage(model.SecondList);
         }else if(model.change =="filter"){
