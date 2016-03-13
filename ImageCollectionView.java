@@ -258,11 +258,14 @@ public class ImageCollectionView extends JPanel implements Observer{
             repaint();
             addImage(model.ImageList);
         }else if(model.change == "view"){
+            removeAll();
+            repaint();
             if(model.viewMode == "grid"){
                 this.setLayout(new FlowLayout());
             }else if(model.viewMode == "list"){
                 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
             }
+            addImage(model.SecondList);
         }else if(model.change =="filter"){
             System.out.println("filter Rating update to: "+model.filterRating);
             filterImages(model.filterRating);
