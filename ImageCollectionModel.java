@@ -12,6 +12,7 @@ public class ImageCollectionModel extends Observable{
     public String change;
     public int width,height;
     public int filterRating;
+    public int rowNum;
 
     ImageCollectionModel(){
         ImageList = new ArrayList<ImageModel>();
@@ -21,6 +22,7 @@ public class ImageCollectionModel extends Observable{
         for(int i=1;i<6;i++){
             fullStar[i] = false;
         }
+        rowNum = 1;
     }
 
     public void addImage(ImageModel m){

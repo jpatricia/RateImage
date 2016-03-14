@@ -1,6 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -12,17 +15,8 @@ public class ImageCollectionView extends JPanel implements Observer{
 
     ImageCollectionView(ImageCollectionModel model_){
         model = model_;
-
-//        //this.setMaximumSize();
-//        panel = new JPanel();
-//        panel.setBackground(new Color(192,233,240));
-//       // panel.setOpaque(true);
-//        panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS)); //default
-//        panel.setSize(model.getWidth(),model.getHeight());
-
-
-        this.setLayout(new FlowLayout()); //default
-
+        //this.setLayout(new GridLayout(0,3));  //default
+        this.setLayout(new FlowLayout(FlowLayout.LEFT,20,20));
     }
 
     public void addImages(ArrayList<ImageModel> collection){
@@ -30,16 +24,27 @@ public class ImageCollectionView extends JPanel implements Observer{
         ArrayList<ImageModel> list = collection;
         int size = list.size();
         if(size !=0){
+
+//            if(model.viewMode == "grid"){
+//                int lastIndex = size-1;
+//                if(lastIndex>3 && lastIndex%3!=0){
+//                    model.rowNum = (lastIndex/3)+1;
+//                }else if(lastIndex%3==0){
+//                    model.rowNum = lastIndex/3;
+//                }
+//                this.setLayout(new GridLayout(model.rowNum,3));
+//            }
+
             for(int i=0;i<size;i++) {
                 //create box for each image
                 JPanel dataBox = new JPanel();
                 dataBox.setLayout(new GridLayout(2,1));
                 Box nameDate = Box.createVerticalBox();
                 Box imgBox = Box.createHorizontalBox();
-                if (model.viewMode == "list") {
+                if (model.viewMode.equals("list")) {
                     System.out.println("box list");
                     imgBox = Box.createHorizontalBox();
-                } else if (model.viewMode == "grid") {
+                } else if (model.viewMode.equals("grid")) {
                     System.out.println("box grid");
                     imgBox = Box.createVerticalBox();
                 }
@@ -54,6 +59,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                 JLabel name = new JLabel();
                 name.setText(title);
                 Image im = icon.getImage();
+                ImageIcon iic = icon;
 
                 //image date created
                 JLabel dateCreated = new JLabel();
@@ -75,7 +81,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                 System.out.println(widthImg + " " + heightImg);
 
                 if (widthImg >= 1000 || heightImg >= 1000) {
-                    im = icon.getImage().getScaledInstance(widthImg / 10, heightImg / 10, Image.SCALE_SMOOTH);
+                    im = icon.getImage().getScaledInstance(widthImg / 6, heightImg / 6, Image.SCALE_SMOOTH);
                     icon = new ImageIcon(im);
                     modified = true;
                 } else if ((widthImg > 400 || heightImg > 400) && (widthImg < 1000 || heightImg < 1000)) {
@@ -84,7 +90,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                     modified = true;
                 }
 
-                Image img = im;
+                Image img = iic.getImage();
                 image.setIcon(icon);
 
                 image.addMouseListener(new MouseAdapter() {
@@ -136,26 +142,31 @@ public class ImageCollectionView extends JPanel implements Observer{
 
                     nameDate.setMaximumSize(new Dimension(200,70));
                     nameDate.setAlignmentX(Component.LEFT_ALIGNMENT);
-//                    nameDate.setAlignmentY(Component.BOTTOM_ALIGNMENT);
 
                     dataBox.setMaximumSize(new Dimension(300,200));
                     dataBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-//                    dataBox.setAlignmentY(Component.CENTER_ALIGNMENT);
 
                 } else if (model.viewMode == "grid") {
                     if(widthImg>300){
-                        imgBox.setPreferredSize(new Dimension(widthImg,200));
+                        imgBox.setPreferredSize(new Dimension(icon.getIconWidth()+150,icon.getIconHeight()+200));
                     }
+                    imgBox.add(Box.createVerticalStrut(10));
+
                     image.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    image.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+                    image.setPreferredSize(new Dimension(icon.getIconWidth(),icon.getIconHeight()));
+
                     name.setAlignmentX(Component.CENTER_ALIGNMENT);
+                    name.setAlignmentY(Component.TOP_ALIGNMENT);
                     dateCreated.setAlignmentX(Component.CENTER_ALIGNMENT);
                     nameDate.setMaximumSize(new Dimension(100,100));
                 }
 
                 imgBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+                imgBox.setAlignmentY(Component.TOP_ALIGNMENT);
+                imgBox.setBorder(BorderFactory.createLineBorder(Color.BLACK,1));
 
                 //add data of the image
-                nameDate.add(Box.createHorizontalStrut(10));
                 nameDate.add(name);
                 nameDate.add(dateCreated);
                 nameDate.setOpaque(true);
@@ -164,25 +175,21 @@ public class ImageCollectionView extends JPanel implements Observer{
                 imgBox.add(image);
                 imgBox.add(Box.createHorizontalStrut(10));
 
-                dataBox.add(nameDate);//////////////
+                dataBox.add(nameDate);
                 dataBox.add(star);
 
                 imgBox.add(dataBox);
                 imgBox.setOpaque(true);
-                star.setBackground(new Color(192, 233, 240));
-                nameDate.setBackground(new Color(192, 233, 240));
+                star.setBackground(new Color(242,255,249));
+                nameDate.setBackground(new Color(242,255,249));
 
                 //testing purpose only
-//                imgBox.setBackground(Color.GRAY);
-//                dataBox.setBackground(Color.PINK);
-//                nameDate.setBackground(Color.CYAN);
+                imgBox.setBackground(Color.GRAY);
+                dataBox.setBackground(Color.PINK);
+                nameDate.setBackground(Color.CYAN);
 
-                this.add(Box.createRigidArea(new Dimension(30, 30)));
+                //this.add(Box.createRigidArea(new Dimension(30, 30)));
                 this.add(imgBox);
-                // panelScroll.add(panel);
-
-                // panel.setOpaque(true);
-                //panelScroll.setOpaque(true);
 
                 int j=i;
                 //action listener for stars
@@ -282,19 +289,20 @@ public class ImageCollectionView extends JPanel implements Observer{
             removeAll();
             repaint();
             addImages(model.ImageList);
-        }else if(model.change == "view"){
+        }else if(model.change.equals("view")){
             removeAll();
             repaint();
-            if(model.viewMode == "grid"){
-                this.setLayout(new FlowLayout());
-                this.setAlignmentX(Component.LEFT_ALIGNMENT);
-            }else if(model.viewMode == "list"){
+            if(model.viewMode.equals("grid")){
+                this.setLayout(new GridLayout(0,3));
+                this.setLayout(new FlowLayout(FlowLayout.LEFT,20,20));
+                //this.setAlignmentX(Component.LEFT_ALIGNMENT);
+            }else if(model.viewMode.equals("list")){
                 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
                 this.setAlignmentX(Component.LEFT_ALIGNMENT);
                 this.setAlignmentY(Component.TOP_ALIGNMENT);
             }
             addImages(model.SecondList);
-        }else if(model.change =="filter"){
+        }else if(model.change.equals("filter")){
             System.out.println("filter Rating update to: "+model.filterRating);
             filterImages(model.filterRating);
         }

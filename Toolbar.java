@@ -44,11 +44,11 @@ public class Toolbar extends JPanel implements Observer{
         load.setIcon(new ImageIcon("load_icon.png"));
 
         //set each item to have the same color as Toolbar background
-        gridButton.setBackground(new Color(242,255,249));
-        listButton.setBackground(new Color(242,255,249));
-        title.setBackground(new Color(242,255,249));
-        filter.setBackground(new Color(242,255,249));
-        load.setBackground(new Color(242,255,249));
+        gridButton.setBackground(new Color(192,233,240));
+        listButton.setBackground(new Color(192,233,240));
+        title.setBackground(new Color(192,233,240));
+        filter.setBackground(new Color(192,233,240));
+        load.setBackground(new Color(192,233,240));
         title.setSize(500,100);
 
         //set the buttons to not have border
@@ -81,9 +81,9 @@ public class Toolbar extends JPanel implements Observer{
         right.add(starPanel);
 
         //set background of right panel
-        starPanel.setBackground(new Color(242,255,249));
-        right.setBackground(new Color(242,255,249));
-        center.setBackground(new Color(242,255,249));
+        starPanel.setBackground(new Color(192,233,240));
+        right.setBackground(new Color(192,233,240));
+        center.setBackground(new Color(192,233,240));
         center.setOpaque(true);
 
         //add panels to view

@@ -36,19 +36,19 @@ public class Stars extends JPanel {
         clear.setIcon(new ImageIcon("clear_icon.png"));
 
         if(content =="toolbar"){
-            star1.setBackground(new Color(242,255,249));
-            star2.setBackground(new Color(242,255,249));
-            star3.setBackground(new Color(242,255,249));
-            star4.setBackground(new Color(242,255,249));
-            star5.setBackground(new Color(242,255,249));
-            clear.setBackground(new Color(242,255,249));
-        }else if(content == "view"){
             star1.setBackground(new Color(192,233,240));
             star2.setBackground(new Color(192,233,240));
             star3.setBackground(new Color(192,233,240));
             star4.setBackground(new Color(192,233,240));
             star5.setBackground(new Color(192,233,240));
             clear.setBackground(new Color(192,233,240));
+        }else if(content == "view"){
+            star1.setBackground(new Color(242,255,249));
+            star2.setBackground(new Color(242,255,249));
+            star3.setBackground(new Color(242,255,249));
+            star4.setBackground(new Color(242,255,249));
+            star5.setBackground(new Color(242,255,249));
+            clear.setBackground(new Color(242,255,249));
         }
 
         star1.setBorderPainted(false);
@@ -71,7 +71,7 @@ public class Stars extends JPanel {
         this.add(star4);
         this.add(star5);
         this.add(clear);
-        this.setBackground(new Color(242,255,249));
+        this.setBackground(new Color(192,233,240));
     }
 
     public void drawStar(){

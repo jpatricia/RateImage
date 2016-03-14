@@ -29,20 +29,20 @@ public class Fotag {
         toolbar.setBackground(new Color(242,255,249));
         toolbar.setMinimumSize(new Dimension(800,100));
         toolbar.setOpaque(true);
-        view.setBackground(new Color(192,233,240));
+        view.setBackground(new Color(242,255,249));
         view.setOpaque(true);
 
         panelScroll = new JScrollPane(view);
-        panelScroll.setPreferredSize(new Dimension(700,500));
-        panelScroll.setBackground(new Color(192,233,240));
-        view.setPreferredSize(new Dimension(800,600));
+        view.setPreferredSize(new Dimension(900,2100));
+        panelScroll.setPreferredSize(new Dimension(860,2000));
+        panelScroll.setBackground(new Color(242,255,249));
 
-//        panelScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-//        panelScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        panelScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        panelScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 
         //add header and view to the panel
         p.add(toolbar,BorderLayout.NORTH);
-        p.add(view,BorderLayout.CENTER);
+        p.add(panelScroll,BorderLayout.CENTER);
 
         f.setVisible(true);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
