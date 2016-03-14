@@ -105,8 +105,12 @@ public class Toolbar extends JPanel implements Observer{
                     File[] file = fileChooser.getSelectedFiles();
                     try {
                         for(int i=0;i<file.length;i++){
-                            ImageModel img = new ImageModel(file[i],0);
-                            model.addImage(img);
+                            if(!(model.checkDuplicate(file[i]))){
+                                //no duplicae found
+                                System.out.println("no duplicate");
+                                ImageModel img = new ImageModel(file[i],0);
+                                model.addImage(img);
+                            }
                         }
                         if(model.filterRating!=0){
                             starButton.clearStar();

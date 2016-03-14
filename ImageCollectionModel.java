@@ -72,11 +72,13 @@ public class ImageCollectionModel extends Observable{
                     //this line is the rating of the image
                     System.out.println("path img: "+pathImage);
                     File prevImg = new File(pathImage);
-                    int imgStarPrev = Integer.parseInt(line);
-                    System.out.println("strStarPrev: "+line);
-                    System.out.println("intStarPrev: "+imgStarPrev);
-                    ImageModel img = new ImageModel(prevImg,imgStarPrev);
-                    addImage(img);
+                    if(prevImg.exists()) { //if file exist
+                        int imgStarPrev = Integer.parseInt(line);
+                        System.out.println("strStarPrev: " + line);
+                        System.out.println("intStarPrev: " + imgStarPrev);
+                        ImageModel img = new ImageModel(prevImg, imgStarPrev);
+                        addImage(img);
+                    }
                 }else if(!isInteger(line)){
                     //this line is the path to the images
                     System.out.println("line: "+ line);
@@ -119,6 +121,35 @@ public class ImageCollectionModel extends Observable{
     public void updateView(){
         setChanged();
         notifyObservers();
+    }
+
+    public boolean checkDuplicate(File checkFile){
+        System.out.println("check Duplicate");
+        try {
+            File prevFile = new File("listOfImages.txt");
+            if(prevFile.exists()){
+                FileReader fr = new FileReader(prevFile);
+                BufferedReader br = new BufferedReader((fr));
+                for (String line; (line = br.readLine()) != null; ) {
+                    if(line.equals(checkFile.getPath())){
+                        System.out.println("linePrev path: "+line);
+                        System.out.println("checkFile path: "+checkFile.getPath());
+                        return true;
+                    }
+                }
+            }
+            for(int i=0;i<SecondList.size();i++){
+                System.out.println("slist path: "+SecondList.get(i).getPath());
+                System.out.println("checkFile path: "+checkFile.getPath());
+                if(SecondList.get(i).getPath().equals(checkFile.getPath())){
+                    return true;
+                }
+            }
+
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+        return false;
     }
 
 

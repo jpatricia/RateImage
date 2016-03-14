@@ -32,8 +32,8 @@ public class Fotag {
         view.setOpaque(true);
 
         panelScroll = new JScrollPane(view);
-        view.setPreferredSize(new Dimension(800,500));
-        panelScroll.setPreferredSize(new Dimension(760,400));
+        view.setPreferredSize(new Dimension(800,800));
+        panelScroll.setPreferredSize(new Dimension(760,700));
         panelScroll.setBackground(new Color(242,255,249));
 
         panelScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

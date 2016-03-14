@@ -177,6 +177,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(1);
                         model.setRatingImage(list.get(j),1);
+                        model.updateView();
                     }
                 });
 
@@ -185,6 +186,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(2);
                         model.setRatingImage(list.get(j),2);
+                        model.updateView();
                     }
                 });
 
@@ -193,6 +195,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(3);
                         model.setRatingImage(list.get(j),3);
+                        model.updateView();
                     }
                 });
 
@@ -201,6 +204,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(4);
                         model.setRatingImage(list.get(j),4);
+                        model.updateView();
                     }
                 });
 
@@ -209,6 +213,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.setRating(5);
                         model.setRatingImage(list.get(j),5);
+                        model.updateView();
                     }
                 });
 
@@ -217,6 +222,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                     public void actionPerformed(ActionEvent e) {
                         star.clearStar();
                         model.setRatingImage(list.get(j),0);
+                        model.updateView();
                     }
                 });
             }
