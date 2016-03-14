@@ -4,7 +4,6 @@ import java.awt.event.*;
 import java.io.*;
 
 public class Fotag {
-
     public Fotag(){
         JFrame f = new JFrame("Fotag");
         ImageCollectionModel model = new ImageCollectionModel();
@@ -37,8 +36,8 @@ public class Fotag {
         panelScroll.setPreferredSize(new Dimension(860,2000));
         panelScroll.setBackground(new Color(242,255,249));
 
-        panelScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        panelScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        panelScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        panelScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         //add header and view to the panel
         p.add(toolbar,BorderLayout.NORTH);

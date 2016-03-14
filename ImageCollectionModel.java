@@ -12,17 +12,15 @@ public class ImageCollectionModel extends Observable{
     public String change;
     public int width,height;
     public int filterRating;
-    public int rowNum;
 
     ImageCollectionModel(){
         ImageList = new ArrayList<ImageModel>();
         SecondList = new ArrayList<ImageModel>();
         viewMode = "grid"; //default
         fullStar = new boolean[6];
-        for(int i=1;i<6;i++){
+        for(int i=1;i<6;i++) {
             fullStar[i] = false;
         }
-        rowNum = 1;
     }
 
     public void addImage(ImageModel m){
