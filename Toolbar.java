@@ -108,6 +108,12 @@ public class Toolbar extends JPanel implements Observer{
                             ImageModel img = new ImageModel(file[i],0);
                             model.addImage(img);
                         }
+                        if(model.filterRating!=0){
+                            starButton.clearStar();
+                            model.filterRating = 0;
+                            model.change = "filter";
+                            model.updateStar();
+                        }
 
                     } catch (Exception ex) {
                         ex.printStackTrace();
