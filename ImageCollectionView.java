@@ -241,6 +241,9 @@ public class ImageCollectionView extends JPanel implements Observer{
         }
 
         System.out.println("list size after filter: "+list.size());
+        removeAll();
+        repaint();
+        revalidate();
         model.SecondList.clear();
         for(int i=0;i<list.size();i++){
             model.SecondList.add(list.get(i));
