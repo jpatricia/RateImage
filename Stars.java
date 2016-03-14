@@ -14,6 +14,7 @@ public class Stars extends JPanel {
     Stars(String c){
 
         this.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+        this.setMaximumSize(new Dimension(300,30));
         content = c;
         filled = new boolean[6];
         for(int i=0;i<6;i++){
