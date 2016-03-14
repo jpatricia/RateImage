@@ -26,25 +26,10 @@ public class ImageCollectionView extends JPanel implements Observer{
 
         this.setLayout(new FlowLayout()); //default
 
-//        ArrayList<ImageModel> list = model.ImageList;
-//        if(list.size() !=0){
-//            System.out.println("imagelist is not empty");
-//            for(int i=0;i<list.size();i++){
-//                JLabel image = new JLabel(list.get(i).getIcon());
-//                JLabel name = new JLabel(list.get(i).getName());
-//
-//                image.setOpaque(true);
-//                name.setOpaque(true);
-//
-//                this.add(image);
-//                this.add(name);
-//                revalidate();
-//            }
-//        }
 
     }
 
-    public void addImage(ArrayList<ImageModel> collection){
+    public void addImages(ArrayList<ImageModel> collection){
         System.out.println("loadImages");
         ArrayList<ImageModel> list = collection;
         int size = list.size();
@@ -130,6 +115,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                         }
                         System.out.println("pref size: " + resized.getPreferredSize());
                         imageWindow.add(resized);
+                        imageWindow.setMaximumSize(new Dimension(800,600));
                         imageWindow.pack();
                         imageWindow.setVisible(true);
                     }
@@ -241,7 +227,7 @@ public class ImageCollectionView extends JPanel implements Observer{
             removeAll();
             repaint();
             //revalidate();
-            addImage(model.SecondList);
+            addImages(model.SecondList);
         }
 
     }
@@ -253,7 +239,7 @@ public class ImageCollectionView extends JPanel implements Observer{
             System.out.println("update add");
             removeAll();
             repaint();
-            addImage(model.ImageList);
+            addImages(model.ImageList);
         }else if(model.change == "view"){
             removeAll();
             repaint();
@@ -263,7 +249,7 @@ public class ImageCollectionView extends JPanel implements Observer{
                 this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
                 this.setAlignmentX(LEFT_ALIGNMENT);
             }
-            addImage(model.SecondList);
+            addImages(model.SecondList);
         }else if(model.change =="filter"){
             System.out.println("filter Rating update to: "+model.filterRating);
             filterImages(model.filterRating);

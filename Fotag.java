@@ -15,6 +15,12 @@ public class Fotag {
         model.addObserver(view);
         model.notifyObservers();
 
+        File prev = new File("listOfImages.txt");
+        if(prev.exists()) {
+            model.prevData(prev);
+            model.updateView();
+        }
+
         JPanel p = new JPanel(new BorderLayout());
         f.getContentPane().add(p);
         f.setSize(1000,700);
@@ -49,16 +55,12 @@ public class Fotag {
                     FileWriter fstream = new FileWriter("listOfImages.txt");
                     PrintWriter writer = new PrintWriter(fstream);
                     BufferedWriter out = new BufferedWriter(writer);
-//                    File file = new File("listOfImages.txt");
-//                    FileOutputStream fs = new FileOutputStream(file);
-//                    ObjectOutputStream out = new ObjectOutputStream(fs);
                     for(int i=0;i<model.ImageList.size();i++){
                         out.write(model.ImageList.get(i).getPath()+"\n");
                         out.newLine();
                         out.write(model.ImageList.get(i).rating+"\n");
                         out.newLine();
                     }
-                    //out.writeObject(model.ImageList);
                     out.close();
 
                 } catch(IOException ex){
