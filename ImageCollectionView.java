@@ -104,6 +104,7 @@ public class ImageCollectionView extends JPanel implements Observer{
 
                 //setting up the alignment
                 if (model.viewMode == "list") {
+                    this.setPreferredSize(new Dimension(800,300*(i+1)));
                     imgBox.setPreferredSize(new Dimension(300,200));
                     image.setPreferredSize(new Dimension(200,200));
                     image.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -134,8 +135,9 @@ public class ImageCollectionView extends JPanel implements Observer{
                     imgBox.add(Box.createHorizontalStrut(10));
 
                 } else if (model.viewMode == "grid") {
-                    this.add(Box.createVerticalStrut(10));
-                    if(i==3) this.add(Box.createHorizontalStrut(10));
+                    int row = size/2;
+                    this.setPreferredSize(new Dimension(800,400*row));
+                    this.add(Box.createVerticalStrut(20));
                     imgBox.setPreferredSize(new Dimension(300,300));
                     imgBox.setAlignmentX(Component.LEFT_ALIGNMENT);
                     imgBox.setMaximumSize(new Dimension(300,200));

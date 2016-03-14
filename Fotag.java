@@ -22,7 +22,7 @@ public class Fotag {
 
         JPanel p = new JPanel(new BorderLayout());
         f.getContentPane().add(p);
-        f.setSize(1000,700);
+        f.setSize(1130,800);
 
         //set background color of header and view
         toolbar.setBackground(new Color(242,255,249));
@@ -32,8 +32,8 @@ public class Fotag {
         view.setOpaque(true);
 
         panelScroll = new JScrollPane(view);
-        view.setPreferredSize(new Dimension(900,2100));
-        panelScroll.setPreferredSize(new Dimension(860,2000));
+        view.setPreferredSize(new Dimension(800,500));
+        panelScroll.setPreferredSize(new Dimension(760,400));
         panelScroll.setBackground(new Color(242,255,249));
 
         panelScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

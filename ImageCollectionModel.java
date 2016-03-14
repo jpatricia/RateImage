@@ -42,6 +42,7 @@ public class ImageCollectionModel extends Observable{
     public void setSize(int w, int h){
         width = w;
         height = h;
+
     }
 
     public void setRatingImage(ImageModel imgModel,int rate){
